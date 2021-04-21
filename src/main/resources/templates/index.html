@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>BB</title>
+</head>
+<body>
+<div style="display: flex; justify-content: space-between">
+    <h2 th:text="#{label.home.title} + ' Breaking Bad'">Internet shop Breaking Bad</h2>
+    <div>
+        <h4><a href="?lang=ru">Русский</a></h4>
+        <h4><a href="?lang=en">English</a></h4>
+    </div>
+</div>
+<div sec:authorize="!isAuthenticated()">
+    <h4><a href="/login" th:text="#{label.url.loginLink}">Enter</a></h4>
+    <h4><a href="/registration" th:text="#{label.url.registration}">Registration</a></h4>
+</div>
+<div sec:authorize="isAuthenticated()">
+    <h4><a href="/logout" th:text="#{label.url.logout}">Logout</a></h4>
+    <h4><a href="/privateOffice" th:text="#{label.url.privateOffice}">Private office</a></h4>
+    <h4><a href="/order" th:text="#{label.url.order}">History of orders</a></h4>
+</div>
+<div>
+    <h4><a href="/catalog/root" th:text="#{label.url.catalog}">Catalog</a></h4>
+    <h4><a href="/cart" th:text="#{label.url.cart}">Cart</a></h4>
+</div>
+</body>
+</html>

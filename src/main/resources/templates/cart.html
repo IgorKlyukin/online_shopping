@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{label.cart.title}">Cart</title>
+    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+    <script type="text/javascript" src="../static/js/cart.js" th:src="@{/js/cart.js}"></script>
+</head>
+<body>
+<h1 th:text="#{label.form.cart}">Cart composition</h1>
+<table th:if="${not #lists.isEmpty(cartEntities)}" >
+    <tr>
+        <td th:text="#{label.form.product}">Product</td>
+        <td></td>
+        <td th:text="#{label.form.count}">Count</td>
+        <td></td>
+        <td th:text="#{label.form.price}">Price</td>
+        <td th:text="#{label.form.sum}">Sum</td>
+    </tr>
+    <tr th:each="cartEntity : ${cartEntities}" th:class="'cartEntity_' + ${cartEntity.getId()}">
+        <td th:text="${cartEntity.getProduct().getName()}"></td>
+        <td>
+            <label>
+                <input th:type="submit" th:value=" '-' "
+                       th:onclick="|reduceProductFromCart(${cartEntity.getId()})|">
+            </label>
+        </td>
+        <td th:text="${cartEntity.getCount()}" th:class="'cartEntityCount_' + ${cartEntity.getId()}"></td>
+        <td>
+            <label>
+                <input th:type="submit" th:value=" '+' "
+                       th:onclick="|enlargeProductToCart(${cartEntity.getId()})|">
+            </label>
+        </td>
+        <td th:text="${cartEntity.getProduct().getPrice()}"
+            th:class="'cartEntityPrice_' + ${cartEntity.getId()}"></td>
+        <td th:text="${cartEntity.getCount() * cartEntity.getProduct().getPrice()}"
+            th:class="'cartEntityCountPrice_' + ${cartEntity.getId()}"></td>
+        <td><p><label>
+            <input th:type="submit" th:value="#{label.form.delete}"
+                   th:onclick="|deleteProductFromCart(${cartEntity.getId()})|">
+        </label>
+        </p></td>
+    </tr>
+</table>
+<form th:if="${not #lists.isEmpty(cartEntities)}" method="post" th:action="@{/order}">
+    <div>
+        <button type="submit" th:text="#{label.form.checkout}">Checkout</button>
+    </div>
+</form>
+<h2 th:if="${#lists.isEmpty(cartEntities)}" th:text="#{label.form.cartIsEmpty}">The cart is empty so far, add the product you are interested in to the cart.</h2>
+<h4><a href="/catalog/root" th:text="#{label.url.catalog}">Catalog</a></h4>
+<h4><a href="/" th:text="#{label.url.home}">Home</a></h4>
+</body>
+</html>

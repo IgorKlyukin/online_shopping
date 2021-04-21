@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{label.catalog.title}">Catalog</title>
+    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+    <script type="text/javascript" src="../static/js/catalog.js" th:src="@{/js/catalog.js}"></script>
+</head>
+<body>
+<h1 th:text="#{label.catalog.title}">Catalog</h1>
+<h4><a href="/" th:text="#{label.url.home}">Home</a></h4>
+<table>
+    <tr>
+        <td th:if="${not #lists.isEmpty(breadCrumbs)}">
+            <a th:href="@{root}"
+               th:text="#{label.catalog.title}">Catalog</a>
+        </td>
+        <td th:each="breadCrumb : ${breadCrumbs}">
+            >>>
+            <a th:href="@{${breadCrumb.getId()}}"
+               th:text="${breadCrumb.getName()}">breadCrumb</a>
+        </td>
+    </tr>
+</table>
+<br>
+<table>
+    <tr>
+        <td>
+            <table>
+                <tr th:each="category : ${categories}">
+                    <td>
+                        <a th:href="@{${category.getId()}}"
+                           th:text="${category.getName()}">category</a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td></td>
+        <td>
+            <a href="/cart" th:text="#{label.url.cart}">Cart</a>
+            <p th:text="#{label.form.itemQuantity} + ': '">Item quantity: </p>
+            <p class="countProduct">0</p>
+            <p th:text="#{label.form.total} + ': '">Total amount: </p>
+            <p class="sumProduct">0</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+        </td>
+        <td>
+            <table>
+                <tr>
+                    <td th:text="#{label.form.product}">Product</td>
+                    <td th:text="#{label.form.description}">Description</td>
+                    <td th:text="#{label.form.price}">Price</td>
+                </tr>
+                <tr th:each="product : ${products}">
+                    <td th:text="${product.getName()}"></td>
+                    <td th:text="${product.getDescription()}"></td>
+                    <td th:text="${product.getPrice()}"></td>
+                    <td><p><input th:type="submit" th:value="#{label.form.buy}" th:onclick="|addProductToCart(${product.getId()})|">
+                    </p></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

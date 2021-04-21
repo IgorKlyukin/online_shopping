@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{label.private.title}">Private office</title>
+</head>
+<body>
+<h1 th:text="#{label.private.title}">Private office</h1>
+<form action="/privateOffice" th:object="${userForm}" method="POST" enctype="utf8">
+    <div>
+        <input th:field="*{username}" th:placeholder="#{placeholder.user.username}" autofocus="true"/>
+        <div style="color: red" th:if="${#fields.hasErrors('username')}"
+             th:errors="*{username}">Name error</div>
+    </div>
+    </br>
+    <div>
+        <input th:field="*{email}" th:placeholder="#{placeholder.user.email}"/>
+        <div style="color: red" th:each="error : ${#fields.errors('email')}"
+             th:text="${error}">Validation error</div>
+        <div style="color: red" th:if="${emailError != null}"
+             th:text="${emailError}">Name error</div>
+    </div>
+    </br>
+    <div>
+        <input th:field="*{phone}" th:placeholder="#{placeholder.user.phone}"/>
+    </div>
+    </br>
+    <button type="submit" th:text="#{label.form.save}">Save</button>
+    <div style="color: green" th:if="${success != null}"
+         th:text="${success}">Success</div>
+    <br>
+    <h4><a href="/" th:text="#{label.url.home}">Home</a></h4>
+</form>
+</body>
+</html>

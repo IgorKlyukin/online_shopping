@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{label.order.title}">Order</title>
+</head>
+<body>
+<h1 th:text="#{label.form.order}">Order composition</h1>
+<table>
+    <tr>
+        <td th:text="#{label.form.product}">Product</td>
+        <td th:text="#{label.form.count}">Count</td>
+        <td th:text="#{label.form.price}">Price</td>
+        <td th:text="#{label.form.sum}">Sum</td>
+    </tr>
+    <tr th:each="orderEntity : ${orderEntities}">
+        <td th:text="${orderEntity.getProduct().getName()}"></td>
+        <td th:text="${orderEntity.getCount()}"></td>
+        <td th:text="${orderEntity.getPrice()}"></td>
+        <td th:text="${orderEntity.getCount() * orderEntity.getPrice()}"></td>
+    </tr>
+</table>
+<h4><a href="/order" th:text="#{label.url.order}">History of orders</a></h4>
+<h4><a href="/catalog/root" th:text="#{label.url.catalog}">Catalog</a></h4>
+<h4><a href="/" th:text="#{label.url.home}">Home</a></h4>
+</body>
+</html>
