@@ -18,7 +18,7 @@
                th:text="${order.getId()}"></a>
         </td>
         <td th:text="${order.getSumTotal()}"></td>
-        <td th:text="${order.getCreatedDate()}"></td>
+        <td th:text="${#dates.format(order.getCreatedDate(), 'dd-MM-yyyy HH:mm')}"></td>
     </tr>
 </table>
 <h2 th:if="${#lists.isEmpty(orders)}" th:text="#{label.form.ordersIsEmpty}">You have not made any orders yet.</h2>

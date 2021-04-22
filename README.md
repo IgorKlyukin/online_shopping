@@ -44,13 +44,11 @@
 3) Spring Data Jpa
 4) PostgreSQL (PL/SQL + CTE)
 5) H2 (для тестирования)
-6) Lombook
+6) Lombok
 7) Stream
 8) REST
 9) JUnit 5
 10) Mockito
-11) slf4j
-12) Gson
 
 ### Front
 1) Thymeleaf

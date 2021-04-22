@@ -2,14 +2,14 @@ package com.example.online_shopping.service;
 
 import com.example.online_shopping.entity.Role;
 import com.example.online_shopping.repository.RoleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class RoleService {
 
-    @Autowired
-    private RoleRepository roleRepository;
+    private final RoleRepository roleRepository;
 
     public static final String ROLE_USER = "ROLE_USER";
 

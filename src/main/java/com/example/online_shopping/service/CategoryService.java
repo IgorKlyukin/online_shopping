@@ -2,16 +2,16 @@ package com.example.online_shopping.service;
 
 import com.example.online_shopping.entity.Category;
 import com.example.online_shopping.repository.CategoryRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
+@RequiredArgsConstructor
 public class CategoryService {
 
-    @Autowired
-    private CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
 
     public Set<Category> getTopCategories() {
         return categoryRepository.findCategoriesByParentIsNull();

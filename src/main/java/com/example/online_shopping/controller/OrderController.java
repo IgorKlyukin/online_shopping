@@ -5,7 +5,7 @@ import com.example.online_shopping.service.CartEntityService;
 import com.example.online_shopping.service.CartService;
 import com.example.online_shopping.service.OrderEntityService;
 import com.example.online_shopping.service.OrderService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,27 +19,28 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Set;
 
+import static com.example.online_shopping.utils.Cookies.isCartCookie;
+
 @Controller
 @RequestMapping("/order")
+@RequiredArgsConstructor
 public class OrderController {
 
-    @Autowired
-    private OrderService orderService;
+    private final OrderService orderService;
 
-    @Autowired
-    private OrderEntityService orderEntityService;
+    private final OrderEntityService orderEntityService;
 
-    @Autowired
-    private CartService cartService;
+    private final CartService cartService;
 
-    @Autowired
-    private CartEntityService cartEntityService;
+    private final CartEntityService cartEntityService;
+
+    private final CartController cartController;
 
     @PostMapping
     public String createOrder(@AuthenticationPrincipal User user, HttpServletRequest request,
                               HttpServletResponse response) {
-        boolean isCartCookie = cartService.isCartCookie(request);
-        Cart cart = cartService.getCartByUser(user, request, response);
+        boolean isCartCookie = isCartCookie(request);
+        Cart cart = cartController.getCartByUser(user, request, response);
         if (isCartCookie) {
             return "redirect:/cart";
         } else {

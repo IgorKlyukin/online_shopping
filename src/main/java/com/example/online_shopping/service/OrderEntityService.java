@@ -4,7 +4,7 @@ import com.example.online_shopping.entity.CartEntity;
 import com.example.online_shopping.entity.Order;
 import com.example.online_shopping.entity.OrderEntity;
 import com.example.online_shopping.repository.OrderEntityRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -13,10 +13,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
+@RequiredArgsConstructor
 public class OrderEntityService {
     
-    @Autowired
-    private OrderEntityRepository orderEntityRepository;
+    private final OrderEntityRepository orderEntityRepository;
 
     public void addOrderEntities(Order order, Set<CartEntity> cartEntities) {
         Set<OrderEntity> orderEntityList = new HashSet<>();

@@ -4,17 +4,17 @@ import com.example.online_shopping.entity.Cart;
 import com.example.online_shopping.entity.CartEntity;
 import com.example.online_shopping.entity.Product;
 import com.example.online_shopping.repository.CartEntityRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.Set;
 
 @Service
+@RequiredArgsConstructor
 public class CartEntityService {
 
-    @Autowired
-    private CartEntityRepository cartEntityRepository;
+    private final CartEntityRepository cartEntityRepository;
 
     public static final String ZERO = "0";
 

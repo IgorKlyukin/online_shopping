@@ -3,7 +3,7 @@ package com.example.online_shopping.service;
 import com.example.online_shopping.entity.Category;
 import com.example.online_shopping.entity.Product;
 import com.example.online_shopping.repository.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.Set;
 
 @Service
+@RequiredArgsConstructor
 public class ProductService {
 
-    @Autowired
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     @Transactional(readOnly = true)
     public Set<Product> getProducts(Set<Category> categories) {

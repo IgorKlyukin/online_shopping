@@ -2,7 +2,7 @@ package com.example.online_shopping.controller;
 
 import com.example.online_shopping.entity.User;
 import com.example.online_shopping.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,9 +15,10 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/registration")
+@RequiredArgsConstructor
 public class RegistrationController {
-    @Autowired
-    private UserService userService;
+
+    private final UserService userService;
 
     @GetMapping
     public String registration(Model model) {

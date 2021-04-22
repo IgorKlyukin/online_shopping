@@ -3,16 +3,16 @@ package com.example.online_shopping.service;
 import com.example.online_shopping.entity.Order;
 import com.example.online_shopping.entity.User;
 import com.example.online_shopping.repository.OrderRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 @Service
+@RequiredArgsConstructor
 public class OrderService {
 
-    @Autowired
-    private OrderRepository orderRepository;
+    private final OrderRepository orderRepository;
 
     public Set<Order> getOrderAll(User user) {
         return orderRepository.findOrdersByUser(user);
